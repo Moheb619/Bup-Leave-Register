@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import Admin from "./pages/Admin";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Employee from "./pages/Employee";
+import Login from "./pages/Login";
+import DashboardAdmin from "./components/DashboardAdmin";
+import DashboardEmployee from "./components/DashboardEmployee";
+import ApplyLeave from "./components/ApplyLeave";
+import LeaveStatus from "./components/LeaveStatus";
+import SidebarEmployee from "./components/SidebarEmployee";
+import { useState } from "react";
+import Sidebar from "./components/SidebarAdmin";
 function App() {
+  const [sidebar, setSidebar] = useState(true);
+  const updateSidebarState = () => {
+    setSidebar(!sidebar);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+          <Route path="/admin" element={<Admin></Admin>} panel="admin"></Route>
+          <Route path="/employee" element={<Employee></Employee>} panel="employee"></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
