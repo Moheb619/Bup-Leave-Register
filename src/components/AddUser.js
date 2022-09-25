@@ -1,8 +1,41 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const AddUser = (props) => {
+  const [full_name, setFullName] = useState("");
+  const [contact, setContact] = useState("");
+  const [email, setEmail] = useState("");
+  const [user_name, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [user_category, setUserCategory] = useState("Admin");
+
+  const handleSubmit = () => {
+    console.log(full_name, " ", contact, " ", email, " ", user_name, " ", password, " ", user_category);
+    const data = {
+      full_name: full_name,
+      contact: contact,
+      email: email,
+      user_name: user_name,
+      password: password,
+      user_category: user_category,
+    };
+    axios
+      .post("http://localhost:8000/api/register", data)
+      .then((response) => {
+        alert(JSON.stringify(response.data));
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
+      <Helmet>
+        <title>Add User | BUP Leave Register</title>
+      </Helmet>
       <div id="main">
         <nav className="navbar navbar-header navbar-expand navbar-light">
           <div onClick={() => props.updateSidebarState()} className="sidebar-toggler" style={{ cursor: "pointer" }}>
@@ -22,12 +55,12 @@ const AddUser = (props) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav d-flex align-items-center navbar-light ms-auto">
               <li className="dropdown nav-icon">
-                <a href="#" data-bs-toggle="dropdown" className="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                {/* <a href="#" data-bs-toggle="dropdown" className="nav-link  dropdown-toggle nav-link-lg nav-link-user">
                   <div className="d-lg-inline-block">
                     <i data-feather="bell"></i>
                     <span className="badge bg-info">2</span>
                   </div>
-                </a>
+                </a> */}
                 <div className="dropdown-menu dropdown-menu-end dropdown-menu-large">
                   <h6 className="py-2 px-4">Notifications</h6>
                   <ul className="list-group rounded-none">
@@ -51,23 +84,23 @@ const AddUser = (props) => {
                 </div>
               </li>
               <li className="dropdown">
-                <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                {/* <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                   <div className="avatar me-1">
-                    <img src="assets/images/admin.png" alt="" />
+                    <img src="/assets/images/admin.png" alt="" />
                   </div>
                   <div className="d-none d-md-block d-lg-inline-block">Hi, Admin</div>
-                </a>
+                </a> */}
                 <div className="dropdown-menu dropdown-menu-end">
-                  <a className="dropdown-item" href="#">
+                  {/* <a className="dropdown-item" href="#">
                     <i data-feather="user"></i> Account
                   </a>
                   <a className="dropdown-item" href="#">
                     <i data-feather="settings"></i> Settings
-                  </a>
+                  </a> */}
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="login.html">
+                  <Link to="/" className="dropdown-item">
                     <i data-feather="log-out"></i> Logout
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
@@ -84,9 +117,9 @@ const AddUser = (props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-header">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="index.html" className="text-success">
+                      <Link to="/admin" className="text-success">
                         Dashboard
-                      </a>
+                      </Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       Add User
@@ -104,13 +137,13 @@ const AddUser = (props) => {
                 <div className="card">
                   <div className="card-content">
                     <div className="card-body">
-                      <form className="form">
+                      <div>
                         <div className="row">
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Full Name</label>
+                              <label htmlFor="first-name-icon">Full Name</label>
                               <div className="position-relative">
-                                <input type="text" className="form-control" placeholder="full name" id="first-name-icon" />
+                                <input type="text" className="form-control " placeholder="full name" id="first-name-icon" onChange={(e) => setFullName(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
@@ -119,9 +152,9 @@ const AddUser = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Contact</label>
+                              <label>Contact</label>
                               <div className="position-relative">
-                                <input type="text" className="form-control" placeholder="contact" id="first-name-icon" />
+                                <input type="text" className="form-control " placeholder="contact" id="first-name-icon" onChange={(e) => setContact(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
@@ -130,9 +163,9 @@ const AddUser = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Email</label>
+                              <label>Email</label>
                               <div className="position-relative">
-                                <input type="text" className="form-control" placeholder="email" id="first-name-icon" />
+                                <input type="text" className="form-control " placeholder="email" id="first-name-icon" onChange={(e) => setEmail(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-envelope"></i>
                                 </div>
@@ -141,9 +174,9 @@ const AddUser = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Username</label>
+                              <label>Username</label>
                               <div className="position-relative">
-                                <input type="text" className="form-control" placeholder="username" id="first-name-icon" />
+                                <input type="text" className="form-control " placeholder="username" id="first-name-icon" onChange={(e) => setUserName(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
@@ -152,9 +185,9 @@ const AddUser = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Password</label>
+                              <label>Password</label>
                               <div className="position-relative">
-                                <input type="password" className="form-control" placeholder="password" id="first-name-icon" />
+                                <input type="password" className="form-control " placeholder="password" id="first-name-icon" onChange={(e) => setPassword(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-key"></i>
                                 </div>
@@ -163,9 +196,9 @@ const AddUser = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">User Category</label>
+                              <label>User Category</label>
                               <div className="position-relative">
-                                <fieldset className="form-group">
+                                <fieldset className="form-group" onChange={(e) => setUserCategory(e.target.value)}>
                                   <select className="form-select" id="basicSelect">
                                     <option>Admin</option>
                                     <option>Staff</option>
@@ -175,12 +208,12 @@ const AddUser = (props) => {
                             </div>
                           </div>
                           <div className="col-12 d-flex justify-content-end">
-                            <button type="submit" className="btn btn-primary me-1 mb-1">
+                            <button type="submit" className="btn btn-primary me-1 mb-1" onClick={handleSubmit}>
                               Submit
                             </button>
                           </div>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>

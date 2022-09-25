@@ -1,9 +1,13 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const ApplyLeave = (props) => {
   return (
     <>
+      <Helmet>
+        <title>Apply Leave | BUP Leave Register</title>
+      </Helmet>
       <div id="main">
         <nav className="navbar navbar-header navbar-expand navbar-light">
           <div onClick={() => props.updateSidebarState()} className="sidebar-toggler" style={{ cursor: "pointer" }}>
@@ -25,21 +29,21 @@ const ApplyLeave = (props) => {
               <li className="dropdown">
                 <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                   <div className="avatar me-1">
-                    <img src="assets/images/admin.png" alt="" />
+                    <img src="/assets/images/admin.png" alt="" />
                   </div>
                   <div className="d-none d-md-block d-lg-inline-block">Hi, Employee</div>
                 </a>
                 <div className="dropdown-menu dropdown-menu-end">
-                  <Link to="/update_profile" class="dropdown-item">
+                  <Link to="/update_profile" className="dropdown-item">
                     <i data-feather="user"></i> Account
                   </Link>
-                  <Link to="/update_password" class="dropdown-item">
+                  <Link to="/update_password" className="dropdown-item">
                     <i data-feather="settings"></i> Change Password
                   </Link>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="login.html">
+                  <Link to="/" className="dropdown-item">
                     <i data-feather="log-out"></i> Logout
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
@@ -56,9 +60,9 @@ const ApplyLeave = (props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-header">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="index.html" className="text-success">
+                      <Link to="/employee" className="text-success">
                         Dashboard
-                      </a>
+                      </Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       Leave Application

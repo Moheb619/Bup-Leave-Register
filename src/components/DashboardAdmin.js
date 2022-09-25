@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 
 const DashboardAdmin = (props) => {
   return (
@@ -57,7 +58,7 @@ const DashboardAdmin = (props) => {
               <li className="dropdown">
                 <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                   <div className="avatar me-1">
-                    <img src="assets/images/admin.png" alt="" />
+                    <img src="/assets/images/admin.png" alt="" />
                   </div>
                   <div className="d-none d-md-block d-lg-inline-block">Hi, Admin</div>
                 </a>
@@ -69,9 +70,9 @@ const DashboardAdmin = (props) => {
                     <i data-feather="settings"></i> Settings
                   </a>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="login.html">
+                  <Link to="/" className="dropdown-item">
                     <i data-feather="log-out"></i> Logout
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>

@@ -893,7 +893,9 @@ footer {
     font-size: .85rem;
     display: flex;
     align-items: center;
-    transition: all .5s
+    transition: all .5s;
+    cursor:pointer;
+    user-select: none;
 }
 
 .sidebar-wrapper .menu .sidebar-link:hover span {
@@ -1032,7 +1034,8 @@ footer {
 }
 
 .card .card-body {
-    padding: 1.4rem 1.7rem
+    padding: 1.4rem 1.7rem;
+    overflow-x: auto;
 }
 
 .card .card-heading {

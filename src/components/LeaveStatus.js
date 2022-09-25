@@ -1,16 +1,20 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
 const LeaveStatus = (props) => {
   return (
     <>
+      <Helmet>
+        <title>Leave Status | BUP Leave Register</title>
+      </Helmet>
       <div id="main">
-        <nav class="navbar navbar-header navbar-expand navbar-light">
+        <nav className="navbar navbar-header navbar-expand navbar-light">
           <div onClick={() => props.updateSidebarState()} className="sidebar-toggler" style={{ cursor: "pointer" }}>
             <span className="navbar-toggler-icon"></span>
           </div>
           <button
-            class="btn navbar-toggler"
+            className="btn navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -18,60 +22,60 @@ const LeaveStatus = (props) => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
-              <li class="dropdown">
-                <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                  <div class="avatar me-1">
-                    <img src="assets/images/admin.png" alt="" />
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav d-flex align-items-center navbar-light ms-auto">
+              <li className="dropdown">
+                <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                  <div className="avatar me-1">
+                    <img src="/assets/images/admin.png" alt="" />
                   </div>
-                  <div class="d-none d-md-block d-lg-inline-block">Hi, Employee</div>
+                  <div className="d-none d-md-block d-lg-inline-block">Hi, Employee</div>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end">
-                  <Link to="/update_profile" class="dropdown-item">
+                <div className="dropdown-menu dropdown-menu-end">
+                  <Link to="/update_profile" className="dropdown-item">
                     <i data-feather="user"></i> Account
                   </Link>
-                  <Link to="/update_password" class="dropdown-item">
+                  <Link to="/update_password" className="dropdown-item">
                     <i data-feather="settings"></i> Change Password
                   </Link>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="login.html">
+                  <div className="dropdown-divider"></div>
+                  <Link to="/" className="dropdown-item">
                     <i data-feather="log-out"></i> Logout
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
           </div>
         </nav>
 
-        <div class="main-content container-fluid">
-          <div class="page-title">
-            <div class="row">
-              <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Manage Leave Status</h3>
+        <div className="main-content container-fluid">
+          <div className="page-title">
+            <div className="row">
+              <div className="col-12 col-md-6 order-md-1 order-last">
+                <h3>Leave Status</h3>
               </div>
-              <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="index.html" class="text-success">
+              <div className="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" className="breadcrumb-header">
+                  <ol className="breadcrumb">
+                    <li className="breadcrumb-item">
+                      <Link to="/employee" className="text-success">
                         Dashboard
-                      </a>
+                      </Link>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                      Manage Leave Status
+                    <li className="breadcrumb-item active" aria-current="page">
+                      Leave Status
                     </li>
                   </ol>
                 </nav>
               </div>
             </div>
           </div>
-          <section class="section">
-            <div class="card">
-              <div class="card-body">
-                <table class="table" id="table1">
+          <section className="section">
+            <div className="card">
+              <div className="card-body">
+                <table className="table" id="table1">
                   <thead>
                     <tr>
                       <th>Leave Type</th>
@@ -90,7 +94,7 @@ const LeaveStatus = (props) => {
                       <td>2021-11-01</td>
                       <td>waiting for approval</td>
                       <td>
-                        <span class="badge bg-info">Pending</span>
+                        <span className="badge bg-info">Pending</span>
                       </td>
                     </tr>
                   </tbody>

@@ -1,7 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Sidebar from "./SidebarAdmin";
-
+import { Link } from "react-router-dom";
 const AddDepartment = (props) => {
   return (
     <>
@@ -58,7 +57,7 @@ const AddDepartment = (props) => {
               <li className="dropdown">
                 <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
                   <div className="avatar me-1">
-                    <img src="assets/images/admin.png" alt="" />
+                    <img src="/assets/images/admin.png" alt="" />
                   </div>
                   <div className="d-none d-md-block d-lg-inline-block">Hi, Admin</div>
                 </a>
@@ -70,9 +69,9 @@ const AddDepartment = (props) => {
                     <i data-feather="settings"></i> Settings
                   </a>
                   <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="login.html">
+                  <Link to="/" className="dropdown-item">
                     <i data-feather="log-out"></i> Logout
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>
@@ -88,9 +87,9 @@ const AddDepartment = (props) => {
                 <nav aria-label="breadcrumb" className="breadcrumb-header">
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <a href="index.html" className="text-success">
+                      <Link to="/admin" className="text-success">
                         Dashboard
-                      </a>
+                      </Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
                       Add Department
@@ -156,5 +155,3 @@ const AddDepartment = (props) => {
 };
 
 export default AddDepartment;
-
-// AddDepartment by Tashfia Sikder Reeti
