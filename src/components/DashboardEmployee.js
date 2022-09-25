@@ -1,8 +1,31 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 const DashboardEmployee = (props) => {
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0, scaleY: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      scaleY: 1,
+      transition: {
+        ease: "linear",
+      },
+    },
+  };
   return (
     <>
       <Helmet>
@@ -54,8 +77,8 @@ const DashboardEmployee = (props) => {
             <h3>Dashboard</h3>
           </div>
           <section className="section">
-            <div className="row mb-2">
-              <div className="col-xl-4 col-md-12 mb-4">
+            <motion.div variants={container} initial="hidden" animate="visible" className="row mb-2">
+              <motion.div variants={item} className="col-xl-4 col-md-12 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between p-md-1">
@@ -71,8 +94,8 @@ const DashboardEmployee = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
-              <div className="col-xl-4 col-md-12 mb-4">
+              </motion.div>{" "}
+              <motion.div variants={item} className="col-xl-4 col-md-12 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between p-md-1">
@@ -88,8 +111,8 @@ const DashboardEmployee = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
-              <div className="col-xl-4 col-md-12 mb-4">
+              </motion.div>{" "}
+              <motion.div variants={item} className="col-xl-4 col-md-12 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between p-md-1">
@@ -105,8 +128,8 @@ const DashboardEmployee = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>{" "}
-              <div className="col-xl-4 col-md-12 mb-4">
+              </motion.div>{" "}
+              <motion.div variants={item} className="col-xl-4 col-md-12 mb-4">
                 <div className="card">
                   <div className="card-body">
                     <div className="d-flex justify-content-between p-md-1">
@@ -122,8 +145,8 @@ const DashboardEmployee = (props) => {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </section>
         </div>
       </div>
