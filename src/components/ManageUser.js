@@ -1,8 +1,21 @@
 import React from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import { useState } from "react";
+import useFetch from "../hooks/useFetch";
 const ManageUser = (props) => {
+  const [visibilityRow, setVisibilityRow] = useState("");
+  const handleDelete = (id, user_name) => {
+    const deletedUser = axios.delete(`http://localhost:8000/api/delete_user/${id}`).then((response) => {
+      // alert("User Deleted Successfully");
+      setVisibilityRow(user_name);
+    });
+  };
+
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
+  const user = data.user;
   return (
     <>
       <Helmet>
@@ -110,59 +123,25 @@ const ManageUser = (props) => {
                       <th>Full Name</th>
                       <th>Contact</th>
                       <th>Category</th>
-                      <th>Status</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Admin Admin</td>
-                      <td>09123456789</td>
-                      <td>Admin</td>
-                      <td>
-                        <span className="badge bg-success">Active</span>
-                      </td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>John Doe</td>
-                      <td>09123456789</td>
-                      <td>Staff</td>
-                      <td>
-                        <span className="badge bg-success">Active</span>
-                      </td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Jane Doe</td>
-                      <td>09123456789</td>
-                      <td>Staff</td>
-                      <td>
-                        <span className="badge bg-danger">Deactivated</span>
-                      </td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    {user?.map((us) => (
+                      <tr key={us.id} className={us.user_name === visibilityRow ? "d-none" : ""}>
+                        <td>{us.full_name}</td>
+                        <td>{us.contact}</td>
+                        <td>{us.user_category}</td>
+                        <td>
+                          <span style={{ cursor: "pointer" }}>
+                            <i className="fa fa-pen text-success"></i>
+                          </span>{" "}
+                          <span style={{ cursor: "pointer" }} onClick={() => handleDelete(us.id, us.user_name)}>
+                            <i className="fa fa-trash text-danger"></i>
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

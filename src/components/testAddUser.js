@@ -9,10 +9,127 @@ const AddUser = (props) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  // const [errors, setErrors] = useState({});
+  // const [full_name, setFullName] = useState("");
+  // const [contact, setContact] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [user_name, setUserName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [user_category, setUserCategory] = useState("Admin");
+  // const [uniqueContact, setUniqueContact] = useState("");
+  // const [uniqueUserName, setUniqueUserName] = useState("");
+  // const [uniqueEmail, setUniqueEmail] = useState("");
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  // const validateForm = () => {
+  //   const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  //   const validPasswordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+  //   const validContactRegex = /^(?:\+88|88)?(01[3-9]\d{8})$/;
+  //   const errors = {};
+  //   if (full_name === "") {
+  //     errors.full_name = "Full Name is Required";
+  //   }
+  //   if (full_name !== "") {
+  //     errors.full_name = "";
+  //   }
+  //   if (contact === "") {
+  //     errors.contact = "Contact is Required";
+  //   }
+  //   if (contact !== "") {
+  //     errors.contact = "";
+  //     if (!contact.match(validContactRegex)) {
+  //       errors.contact = "Contact invalid";
+  //     }
+  //     if (contact.match(validContactRegex)) {
+  //       errors.contact = "";
+  //     }
+  //   }
+  //   if (email === "") {
+  //     errors.email = "Email is Required";
+  //   }
+  //   if (email !== "") {
+  //     errors.email = "";
+  //     if (!email.match(validEmailRegex)) {
+  //       errors.email = "Email is unvalid";
+  //     }
+  //     if (email.match(validEmailRegex)) {
+  //       errors.email = "";
+  //     }
+  //   }
+  //   if (user_name === "") {
+  //     errors.user_name = "User Name is Required";
+  //   }
+  //   if (user_name !== "") {
+  //     errors.user_name = "";
+  //   }
+  //   if (password === "") {
+  //     errors.password = "Password is Required";
+  //   }
+  //   if (password !== "") {
+  //     errors.password = "";
+  //     if (!password.match(validPasswordRegex)) {
+  //       errors.password = "Password must containts 8-16 characters,1 Uppercase Letter, 1 Number , 1 Special Character, e.g., ! @ # ?";
+  //     }
+  //     if (password.match(validPasswordRegex)) {
+  //       errors.password = "";
+  //     }
+  //   }
+  //   setErrors(errors);
+  // };
+
+  // const handleSubmit = () => {
+  //   const data = {
+  //     full_name: full_name,
+  //     contact: contact,
+  //     email: email,
+  //     user_name: user_name,
+  //     password: password,
+  //     user_category: user_category,
+  //   };
+  //   validateForm();
+
+  //   if (!errors.full_name && !errors.contact && !errors.email && !errors.user_name && !errors.password) {
+  //     axios
+  //       .post("http://localhost:8000/api/register", data)
+  //       .then((response) => {
+  //         const errors = {};
+  //         console.log(response.data);
+  //         if (response.data.contact) {
+  //           errors.uniquecontact = response.data.contact.toString();
+  //         }
+  //         if (!response.data.contact) {
+  //           errors.uniqueuniquecontact = "";
+  //         }
+  //         if (response.data.email) {
+  //           errors.uniqueemail = response.data.email.toString();
+  //         }
+  //         if (!response.data.email) {
+  //           errors.uniqueemail = "";
+  //         }
+  //         if (response.data.user_name) {
+  //           errors.uniqueuser_name = response.data.user_name.toString();
+  //         }
+  //         if (!response.data.user_name) {
+  //           errors.uniqueuser_name = "";
+  //         }
+  //         setErrors(errors);
+  //         if (!errors.uniquecontact && !errors.uniqueemail && !errors.uniqueuser_name) {
+  //           const inputs = document.querySelectorAll("#first-name-icon");
+  //           inputs.forEach((input) => {
+  //             input.value = "";
+  //           });
+  //           setFullName("");
+  //           setContact("");
+  //           setEmail("");
+  //           setUserName("");
+  //           setPassword("");
+  //           setUserCategory("");
+  //         }
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   }
+  // };
 
   return (
     <>
@@ -120,123 +237,74 @@ const AddUser = (props) => {
                 <div className="card">
                   <div className="card-content">
                     <div className="card-body">
-                      <form onSubmit={handleSubmit(onSubmit)}>
+                      <div>
                         <div className="row">
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
                               <label htmlFor="first-name-icon">Full Name</label>
                               <div className="position-relative">
-                                <input
-                                  type="text"
-                                  className="form-control addUserInput"
-                                  placeholder="full name"
-                                  id="first-name-icon"
-                                  {...register("fullName", {
-                                    required: true,
-                                  })}
-                                />
+                                <input type="text" className="form-control addUserInput" placeholder="full name" id="first-name-icon" onChange={(e) => setFullName(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
                               </div>
                             </div>
-                            {errors.fullName && <p className="text-danger">Full Name Required</p>}
+                            {errors.full_name ? <p className="text-red">{errors.full_name}</p> : ""}
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
                               <label>Contact</label>
                               <div className="position-relative">
-                                <input
-                                  type="text"
-                                  className="form-control addUserInput"
-                                  placeholder="contact"
-                                  id="first-name-icon"
-                                  {...register("contact", {
-                                    required: true,
-                                    pattern: /^(?:\+88|88)?(01[3-9]\d{8})$/,
-                                  })}
-                                />
+                                <input type="text" className="form-control addUserInput" placeholder="contact" id="first-name-icon" onChange={(e) => setContact(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
                               </div>
                             </div>
-                            {errors.contact && <p className="text-danger">Please check the Contact</p>}
+                            {errors.contact ? <p className="text-red">{errors.contact}</p> : errors.uniquecontact ? <p className="text-red">{errors.uniquecontact}</p> : ""}
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
                               <label>Email</label>
                               <div className="position-relative">
-                                <input
-                                  type="text"
-                                  className="form-control addUserInput"
-                                  placeholder="email"
-                                  id="first-name-icon"
-                                  {...register("email", {
-                                    required: true,
-                                    pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                  })}
-                                />
+                                <input type="text" className="form-control addUserInput" placeholder="email" id="first-name-icon" onChange={(e) => setEmail(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-envelope"></i>
                                 </div>
                               </div>
                             </div>
-                            {errors.email && <p className="text-danger">Please check the Email</p>}
+                            {errors.email ? <p className="text-red">{errors.email}</p> : errors.uniqueemail ? <p className="text-red">{errors.uniqueemail}</p> : ""}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
                               <label>Username</label>
                               <div className="position-relative">
-                                <input
-                                  type="text"
-                                  className="form-control addUserInput"
-                                  placeholder="username"
-                                  id="first-name-icon"
-                                  {...register("userName", {
-                                    required: true,
-                                  })}
-                                />
+                                <input type="text" className="form-control addUserInput" placeholder="username" id="first-name-icon" onChange={(e) => setUserName(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-user"></i>
                                 </div>
                               </div>
                             </div>
-                            {errors.userName && <p className="text-danger">Please check the User Name</p>}
+                            {errors.user_name ? <p className="text-red">{errors.user_name}</p> : errors.uniqueuser_name ? <p className="text-red">{errors.uniqueuser_name}</p> : ""}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
                               <label>Password</label>
                               <div className="position-relative">
-                                <input
-                                  type="password"
-                                  className="form-control addUserInput"
-                                  placeholder="password"
-                                  id="first-name-icon"
-                                  {...register("password", {
-                                    required: true,
-                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
-                                  })}
-                                />
+                                <input type="password" className="form-control addUserInput" placeholder="password" id="first-name-icon" onChange={(e) => setPassword(e.target.value)} />
                                 <div className="form-control-icon">
                                   <i className="fa fa-key"></i>
                                 </div>
                               </div>
                             </div>
-                            {errors.password && <p className="text-danger">Please check the Password</p>}
+                            {errors.password ? <p className="text-red">{errors.password}</p> : ""}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
                               <label>User Category</label>
                               <div className="position-relative">
-                                <fieldset className="form-group">
-                                  <select
-                                    className="form-select"
-                                    id="basicSelect"
-                                    {...register("userCategory", {
-                                      required: true,
-                                    })}
-                                  >
+                                <fieldset className="form-group" onChange={(e) => setUserCategory(e.target.value)}>
+                                  <select className="form-select" id="basicSelect">
                                     <option>Admin</option>
                                     <option>Staff</option>
                                   </select>
@@ -250,7 +318,7 @@ const AddUser = (props) => {
                             </button>
                           </div>
                         </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>
