@@ -3,15 +3,58 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import useFetch from "../hooks/useFetch";
 const AddUser = (props) => {
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
+  const users = data.user;
   const {
     register,
     handleSubmit,
+    onChange,
     formState: { errors },
   } = useForm();
 
+  const handleUnique = (inputField, val) => {
+    let isUnique = true;
+    users.map((us) => {
+      if (inputField === "contact") {
+        if (us.contact === val) {
+          isUnique = false;
+          return isUnique;
+        }
+      } else if (inputField === "email") {
+        if (us.email === val) {
+          isUnique = false;
+          return isUnique;
+        }
+      } else if (inputField === "userName") {
+        if (us.user_name === val) {
+          isUnique = false;
+          return isUnique;
+        }
+      }
+    });
+    return isUnique;
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
+    const userData = {
+      full_name: data.fullName,
+      contact: data.contact,
+      email: data.email,
+      user_name: data.userName,
+      password: data.password,
+      user_category: data.userCategory,
+    };
+    axios
+      .post("http://localhost:8000/api/register", userData)
+      .then((response) => {
+        alert(response.status);
+        document.getElementById("userForm").reset();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (
@@ -120,7 +163,7 @@ const AddUser = (props) => {
                 <div className="card">
                   <div className="card-content">
                     <div className="card-body">
-                      <form onSubmit={handleSubmit(onSubmit)}>
+                      <form id="userForm" onSubmit={handleSubmit(onSubmit)}>
                         <div className="row">
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
@@ -132,7 +175,7 @@ const AddUser = (props) => {
                                   placeholder="full name"
                                   id="first-name-icon"
                                   {...register("fullName", {
-                                    required: true,
+                                    required: "Full Name is Required",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -140,7 +183,7 @@ const AddUser = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {errors.fullName && <p className="text-danger">Full Name Required</p>}
+                            {errors.fullName && <p className="text-danger">{errors.fullName.message}</p>}
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
@@ -150,10 +193,11 @@ const AddUser = (props) => {
                                   type="text"
                                   className="form-control addUserInput"
                                   placeholder="contact"
-                                  id="first-name-icon"
+                                  id="first-name-icon addUserContactInput"
                                   {...register("contact", {
-                                    required: true,
-                                    pattern: /^(?:\+88|88)?(01[3-9]\d{8})$/,
+                                    required: "Contact is Required",
+                                    pattern: { value: /^(?:\+88|88)?(01[3-9]\d{8})$/, message: "Contact must follow Bangladesh Number Format" },
+                                    validate: (value) => handleUnique("contact", value) || "Contact is already taken",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -161,7 +205,7 @@ const AddUser = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {errors.contact && <p className="text-danger">Please check the Contact</p>}
+                            {errors.contact && <p className="text-danger">{errors.contact.message}</p>}
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
@@ -171,10 +215,14 @@ const AddUser = (props) => {
                                   type="text"
                                   className="form-control addUserInput"
                                   placeholder="email"
-                                  id="first-name-icon"
+                                  id="first-name-icon addUserEmailInput"
                                   {...register("email", {
-                                    required: true,
-                                    pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                    required: "Email is required",
+                                    pattern: {
+                                      value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                      message: "Email is invalid",
+                                    },
+                                    validate: (value) => handleUnique("email", value) || "Email is already taken",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -182,7 +230,7 @@ const AddUser = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {errors.email && <p className="text-danger">Please check the Email</p>}
+                            {errors.email && <p className="text-danger">{errors.email.message}</p>}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
@@ -192,9 +240,10 @@ const AddUser = (props) => {
                                   type="text"
                                   className="form-control addUserInput"
                                   placeholder="username"
-                                  id="first-name-icon"
+                                  id="first-name-icon addUserUserNameInput"
                                   {...register("userName", {
-                                    required: true,
+                                    required: "User Name is Required",
+                                    validate: (value) => handleUnique("userName", value) || "User Name is already Taken",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -202,7 +251,7 @@ const AddUser = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {errors.userName && <p className="text-danger">Please check the User Name</p>}
+                            {errors.userName && <p className="text-danger">{errors.userName.message}</p>}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
@@ -214,8 +263,11 @@ const AddUser = (props) => {
                                   placeholder="password"
                                   id="first-name-icon"
                                   {...register("password", {
-                                    required: true,
-                                    pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                    required: "Password is required",
+                                    pattern: {
+                                      value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                                      message: "Password must containts 8-16 characters,1 Uppercase Letter, 1 Number , 1 Special Character, e.g., ! @ # ?",
+                                    },
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -223,7 +275,7 @@ const AddUser = (props) => {
                                 </div>
                               </div>
                             </div>
-                            {errors.password && <p className="text-danger">Please check the Password</p>}
+                            {errors.password && <p className="text-danger">{errors.password.message}</p>}
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
@@ -245,7 +297,7 @@ const AddUser = (props) => {
                             </div>
                           </div>
                           <div className="col-12 d-flex justify-content-end">
-                            <button type="submit" className="btn btn-primary me-1 mb-1" onClick={handleSubmit}>
+                            <button type="submit" className="btn btn-primary me-1 mb-1">
                               Submit
                             </button>
                           </div>
