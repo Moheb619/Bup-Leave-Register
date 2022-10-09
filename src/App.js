@@ -20,8 +20,6 @@ import AllLeave from "./components/AllLeave";
 import PendingLeave from "./components/PendingLeave";
 import ApproveLeave from "./components/ApproveLeave";
 import NotApproveLeave from "./components/NotApproveLeave";
-import AddUser from "./components/AddUser";
-import ManageUser from "./components/ManageUser";
 function App() {
   const [sidebar, setSidebar] = useState(true);
   const updateSidebarState = () => {
@@ -176,24 +174,6 @@ function App() {
                 <>
                   <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
                   <NotApproveLeave updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="add_user"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <AddUser updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="manage_user"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <ManageUser updateSidebarState={updateSidebarState} />
                 </>
               }
             ></Route>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import TopNav from "./TopNav";
 
 const UpdateEmployeeAccount = (props) => {
   return (
@@ -9,46 +10,7 @@ const UpdateEmployeeAccount = (props) => {
         <title>Update Employee Account | BUP Leave Register</title>
       </Helmet>
       <div id="main">
-        <nav className="navbar navbar-header navbar-expand navbar-light">
-          <div onClick={() => props.updateSidebarState()} className="sidebar-toggler" style={{ cursor: "pointer" }}>
-            <span className="navbar-toggler-icon"></span>
-          </div>
-          <button
-            className="btn navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav d-flex align-items-center navbar-light ms-auto">
-              <li className="dropdown">
-                <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                  <div className="avatar me-1">
-                    <img src="/assets/images/admin.png" alt="" />
-                  </div>
-                  <div className="d-none d-md-block d-lg-inline-block">Hi, Employee</div>
-                </a>
-                <div className="dropdown-menu dropdown-menu-end">
-                  <a className="dropdown-item" href="update.html">
-                    <i data-feather="user"></i> Account
-                  </a>
-                  <a className="dropdown-item" href="update_password.html">
-                    <i data-feather="settings"></i> Settings
-                  </a>
-                  <div className="dropdown-divider"></div>
-                  <Link to="/" className="dropdown-item">
-                    <i data-feather="log-out"></i> Logout
-                  </Link>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <TopNav updateSidebarState={props.updateSidebarState}></TopNav>
 
         <div className="main-content container-fluid">
           <div className="page-title">

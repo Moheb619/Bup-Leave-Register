@@ -114,20 +114,6 @@ const Sidebar = (props) => {
                   </li>
                 </ul>
               </li>
-              <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(6)}>
-                  <i className="fa fa-user text-success"></i>
-                  <span>Users</span>
-                </div>
-                <ul className={submenu === 6 ? "submenu active" : "submenu"}>
-                  <li>
-                    <Link to="/admin/add_user">Add User</Link>
-                  </li>
-                  <li>
-                    <Link to="/admin/manage_user">Manage Users</Link>
-                  </li>
-                </ul>
-              </li>
               {/* <li className="sidebar-item ">
               <a href="reports.html" className="sidebar-link">
                 <i className="fa fa-chart-bar text-success"></i>
