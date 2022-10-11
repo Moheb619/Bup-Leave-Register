@@ -20,6 +20,8 @@ import AllLeave from "./components/AllLeave";
 import PendingLeave from "./components/PendingLeave";
 import ApproveLeave from "./components/ApproveLeave";
 import NotApproveLeave from "./components/NotApproveLeave";
+import AddSubject from "./components/AddSubject";
+import ManageSubject from "./components/ManageSubject";
 function App() {
   const [sidebar, setSidebar] = useState(true);
   const updateSidebarState = () => {
@@ -30,6 +32,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />}></Route>
+
+          {/* Employee Panel */}
           <Route path="/employee">
             <Route
               path=""
@@ -59,6 +63,8 @@ function App() {
               }
             ></Route>
           </Route>
+
+          {/* Admin Panel */}
           <Route path="/admin">
             <Route
               path=""
@@ -66,42 +72,6 @@ function App() {
                 <>
                   <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
                   <DashboardAdmin updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="add_department"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <AddDepartment updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="manage_department"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <ManageDepartment updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="add_designation"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <AddDesignation updateSidebarState={updateSidebarState} />
-                </>
-              }
-            ></Route>
-            <Route
-              path="manage_designation"
-              element={
-                <>
-                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
-                  <ManageDesignation updateSidebarState={updateSidebarState} />
                 </>
               }
             ></Route>

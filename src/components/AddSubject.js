@@ -2,11 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
-const AddDepartment = (props) => {
+const AddSubject = (props) => {
   return (
     <>
       <Helmet>
-        <title>Add Department | BUP Leave Register</title>
+        <title>Add Subject | BUP Leave Register</title>
       </Helmet>
       <div id="main">
         <TopNav updateSidebarState={props.updateSidebarState}></TopNav>
@@ -52,17 +52,17 @@ const AddDepartment = (props) => {
                                     <i className="fa fa-table"></i>
                                   </div>
                                 </div> */}
-                                <label for="company-column">Faculty</label>
+                                <label for="company-column">Department</label>
                                 <fieldset className="form-group">
                                   <select className="form-select" id="basicSelect">
-                                    <option>FST</option>
+                                    <option>ICT</option>
                                   </select>
                                 </fieldset>
                               </div>
                             </div>
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label htmlFor="first-name-icon">Department</label>
+                                <label htmlFor="first-name-icon">Subject</label>
                                 <div className="position-relative">
                                   <input type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
                                   <div className="form-control-icon">
@@ -93,4 +93,4 @@ const AddDepartment = (props) => {
   );
 };
 
-export default AddDepartment;
+export default AddSubject;

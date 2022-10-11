@@ -18,7 +18,6 @@ const Sidebar = (props) => {
     } else {
       setSubemenu(num);
     }
-    console.log(submenu);
   };
   return (
     <>
@@ -39,39 +38,11 @@ const Sidebar = (props) => {
                 </Link>
               </li>
               <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(1)}>
-                  <i className="fa fa-building text-success"></i>
-                  <span>Department</span>
-                </div>
-                <ul className={submenu === 1 ? "submenu active" : "submenu"}>
-                  <li>
-                    <Link to="/admin/add_department">Add Department</Link>
-                  </li>
-                  <li>
-                    <Link to="/admin/manage_department">Manage Department</Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(2)}>
-                  <i className="fa fa-table text-success"></i>
-                  <span>Designation</span>
-                </div>
-                <ul className={submenu === 2 ? "submenu active" : "submenu"}>
-                  <li>
-                    <Link to="/admin/add_designation">Add Designation</Link>
-                  </li>
-                  <li>
-                    <Link to="/admin/manage_designation">Manage Designation</Link>
-                  </li>
-                </ul>
-              </li>
-              <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(3)}>
+                <div className="sidebar-link" onClick={() => handleSubmenu(4)}>
                   <i className="fa fa-users text-success"></i>
                   <span>Employees</span>
                 </div>
-                <ul className={submenu === 3 ? "submenu active" : "submenu"}>
+                <ul className={submenu === 4 ? "submenu active" : "submenu"}>
                   <li>
                     <Link to="/admin/add_employee">Add Employee</Link>
                   </li>
@@ -81,11 +52,11 @@ const Sidebar = (props) => {
                 </ul>
               </li>
               <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(4)}>
+                <div className="sidebar-link" onClick={() => handleSubmenu(5)}>
                   <i className="fa fa-table text-success"></i>
                   <span>Leave Type</span>
                 </div>
-                <ul className={submenu === 4 ? "submenu active" : "submenu"}>
+                <ul className={submenu === 5 ? "submenu active" : "submenu"}>
                   <li>
                     <Link to="/admin/add_leave_type">Add Leave Type</Link>
                   </li>
@@ -95,11 +66,11 @@ const Sidebar = (props) => {
                 </ul>
               </li>
               <li className="sidebar-item  has-sub">
-                <div className="sidebar-link" onClick={() => handleSubmenu(5)}>
+                <div className="sidebar-link" onClick={() => handleSubmenu(6)}>
                   <i className="fa fa-table text-success"></i>
                   <span>Leave Management</span>
                 </div>
-                <ul className={submenu === 5 ? "submenu active" : "submenu"}>
+                <ul className={submenu === 6 ? "submenu active" : "submenu"}>
                   <li>
                     <Link to="/admin/all_leave">All Leaves</Link>
                   </li>
@@ -114,12 +85,6 @@ const Sidebar = (props) => {
                   </li>
                 </ul>
               </li>
-              {/* <li className="sidebar-item ">
-              <a href="reports.html" className="sidebar-link">
-                <i className="fa fa-chart-bar text-success"></i>
-                <span>Reports</span>
-              </a>
-            </li> */}
             </ul>
           </div>
           <button className="sidebar-toggler btn x" onClick={() => props.updateSidebarState()}>
