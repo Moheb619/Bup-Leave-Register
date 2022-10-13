@@ -8,6 +8,7 @@ import useFetch from "../hooks/useFetch";
 const AddEmployee = (props) => {
   const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
   const users = data.user;
+  console.log(data);
   const {
     register,
     handleSubmit,
@@ -43,7 +44,6 @@ const AddEmployee = (props) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data.id);
     const employeeData = {
       id_number: data.id_number,
       gender: data.gender,
@@ -58,15 +58,15 @@ const AddEmployee = (props) => {
       user_name: data.user_name,
       password: data.password,
     };
-    axios
-      .post("http://localhost:8000/api/register", employeeData)
-      .then((response) => {
-        alert(JSON.stringify(response.status));
-        document.getElementById("userForm").reset();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios
+    //   .post("http://localhost:8000/api/register", employeeData)
+    //   .then((response) => {
+    //     alert(JSON.stringify(response.status));
+    //     document.getElementById("userForm").reset();
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   };
   return (
     <>
@@ -110,7 +110,7 @@ const AddEmployee = (props) => {
                         <div className="row">
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">ID Number</label>
+                              <label htmlFor="first-name-icon">ID Number</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -131,7 +131,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Gender</label>
+                              <label htmlFor="first-name-icon">Gender</label>
                               <div className="position-relative">
                                 <fieldset className="form-group">
                                   <select
@@ -151,7 +151,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">First Name</label>
+                              <label htmlFor="first-name-icon">First Name</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -159,7 +159,7 @@ const AddEmployee = (props) => {
                                   placeholder="first name"
                                   id="first-name-icon"
                                   {...register("first_name", {
-                                    required: true,
+                                    required: "First Name is Required",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -171,7 +171,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Last Name</label>
+                              <label htmlFor="first-name-icon">Last Name</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -179,7 +179,7 @@ const AddEmployee = (props) => {
                                   placeholder="last name"
                                   id="first-name-icon"
                                   {...register("last_name", {
-                                    required: true,
+                                    required: "Last name is required",
                                   })}
                                 />
                                 <div className="form-control-icon">
@@ -191,7 +191,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Age</label>
+                              <label htmlFor="first-name-icon">Age</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -199,7 +199,7 @@ const AddEmployee = (props) => {
                                   placeholder="age"
                                   id="first-name-icon"
                                   {...register("age", {
-                                    required: true,
+                                    required: "Age is required",
                                     pattern: {
                                       value: /^[1-9]?[0-9]{1}$|^100$/,
                                       message: "Age is invalid",
@@ -215,7 +215,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Email</label>
+                              <label htmlFor="first-name-icon">Email</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -240,7 +240,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Contact</label>
+                              <label htmlFor="first-name-icon">Contact</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -262,7 +262,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Profile</label>
+                              <label htmlFor="first-name-icon">Profile</label>
                               <div className="position-relative">
                                 <input
                                   type="file"
@@ -282,7 +282,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group">
-                              <label for="country-floating">Deapartment</label>
+                              <label htmlFor="country-floating">Deapartment</label>
                               <fieldset className="form-group">
                                 <select
                                   className="form-select"
@@ -302,7 +302,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group">
-                              <label for="company-column">Designation</label>
+                              <label htmlFor="company-column">Designation</label>
                               <fieldset className="form-group">
                                 <select
                                   className="form-select"
@@ -322,7 +322,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Username</label>
+                              <label htmlFor="first-name-icon">Username</label>
                               <div className="position-relative">
                                 <input
                                   type="text"
@@ -343,7 +343,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Password</label>
+                              <label htmlFor="first-name-icon">Password</label>
                               <div className="position-relative">
                                 <input
                                   type="password"

@@ -46,7 +46,7 @@ const ApplyLeave = (props) => {
                         <div className="row">
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Reference Number</label>
+                              <label htmlFor="first-name-icon">Reference Number</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="id number" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -57,7 +57,7 @@ const ApplyLeave = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Select Leave Type</label>
+                              <label htmlFor="first-name-icon">Select Leave Type</label>
                               <div className="position-relative">
                                 <fieldset className="form-group">
                                   <select className="form-select" id="basicSelect">
@@ -70,7 +70,7 @@ const ApplyLeave = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">From Date</label>
+                              <label htmlFor="first-name-icon">From Date</label>
                               <div className="position-relative">
                                 <input type="date" className="form-control" placeholder="first name" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -81,7 +81,7 @@ const ApplyLeave = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">To Date</label>
+                              <label htmlFor="first-name-icon">To Date</label>
                               <div className="position-relative">
                                 <input type="date" className="form-control" placeholder="first name" id="first-name-icon" />
                                 <div className="form-control-icon">

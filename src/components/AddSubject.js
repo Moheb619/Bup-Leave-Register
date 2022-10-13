@@ -52,7 +52,7 @@ const AddSubject = (props) => {
                                     <i className="fa fa-table"></i>
                                   </div>
                                 </div> */}
-                                <label for="company-column">Department</label>
+                                <label htmlFor="company-column">Department</label>
                                 <fieldset className="form-group">
                                   <select className="form-select" id="basicSelect">
                                     <option>ICT</option>

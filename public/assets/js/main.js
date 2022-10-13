@@ -74,6 +74,6 @@
       var e = window.innerWidth;
       e < 768 && (console.log("widthnya ", e), document.getElementById("sidebar").classList.remove("active"));
     }),
-      feather.replace();
+      // feather.replace();
   },
 ]);

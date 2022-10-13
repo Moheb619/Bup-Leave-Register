@@ -46,7 +46,7 @@ const UpdatePasswordEmployee = (props) => {
                         <div className="row">
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Old Password</label>
+                              <label htmlFor="first-name-icon">Old Password</label>
                               <div className="position-relative">
                                 <input type="password" className="form-control" placeholder="old password" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -57,7 +57,7 @@ const UpdatePasswordEmployee = (props) => {
                           </div>
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">New Password</label>
+                              <label htmlFor="first-name-icon">New Password</label>
                               <div className="position-relative">
                                 <input type="password" className="form-control" placeholder="new password" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -68,7 +68,7 @@ const UpdatePasswordEmployee = (props) => {
                           </div>
                           <div className="col-md-12 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Confirm Password</label>
+                              <label htmlFor="first-name-icon">Confirm Password</label>
                               <div className="position-relative">
                                 <input type="password" className="form-control" placeholder="confirm passsword" id="first-name-icon" />
                                 <div className="form-control-icon">

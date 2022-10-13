@@ -46,7 +46,7 @@ const UpdateEmployeeAccount = (props) => {
                         <div className="row">
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">ID Number</label>
+                              <label htmlFor="first-name-icon">ID Number</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="id number" id="first-name-icon" value="123456" />
                                 <div className="form-control-icon">
@@ -57,7 +57,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Gender</label>
+                              <label htmlFor="first-name-icon">Gender</label>
                               <div className="position-relative">
                                 <fieldset className="form-group">
                                   <select className="form-select" id="basicSelect">
@@ -70,7 +70,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">First Name</label>
+                              <label htmlFor="first-name-icon">First Name</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="first name" id="first-name-icon" value="John" />
                                 <div className="form-control-icon">
@@ -81,7 +81,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Middle Name</label>
+                              <label htmlFor="first-name-icon">Middle Name</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="middle name" id="first-name-icon" value="M." />
                                 <div className="form-control-icon">
@@ -92,7 +92,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-4 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Last Name</label>
+                              <label htmlFor="first-name-icon">Last Name</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="last name" id="first-name-icon" value="Doe" />
                                 <div className="form-control-icon">
@@ -103,7 +103,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Age</label>
+                              <label htmlFor="first-name-icon">Age</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="age" id="first-name-icon" value="24" />
                                 <div className="form-control-icon">
@@ -114,7 +114,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Email</label>
+                              <label htmlFor="first-name-icon">Email</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="email" id="first-name-icon" value="john@gmail.com" />
                                 <div className="form-control-icon">
@@ -125,7 +125,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Contact</label>
+                              <label htmlFor="first-name-icon">Contact</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="contact" id="first-name-icon" value="091234567898" />
                                 <div className="form-control-icon">
@@ -136,7 +136,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-3 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Profile</label>
+                              <label htmlFor="first-name-icon">Profile</label>
                               <div className="position-relative">
                                 <input type="file" className="form-control" placeholder="" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -147,7 +147,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group">
-                              <label for="country-floating">Deapartment</label>
+                              <label htmlFor="country-floating">Deapartment</label>
                               <fieldset className="form-group">
                                 <select className="form-select" id="basicSelect">
                                   <option>IT</option>
@@ -160,7 +160,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group">
-                              <label for="company-column">Designation</label>
+                              <label htmlFor="company-column">Designation</label>
                               <fieldset className="form-group">
                                 <select className="form-select" id="basicSelect">
                                   <option>IT</option>
@@ -173,7 +173,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Username</label>
+                              <label htmlFor="first-name-icon">Username</label>
                               <div className="position-relative">
                                 <input type="text" className="form-control" placeholder="username" id="first-name-icon" />
                                 <div className="form-control-icon">
@@ -184,7 +184,7 @@ const UpdateEmployeeAccount = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">
-                              <label for="first-name-icon">Password</label>
+                              <label htmlFor="first-name-icon">Password</label>
                               <div className="position-relative">
                                 <input type="password" className="form-control" placeholder="passsword" id="first-name-icon" />
                                 <div className="form-control-icon">

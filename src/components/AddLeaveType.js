@@ -47,7 +47,7 @@ const AddLeaveType = (props) => {
                           <div className="row">
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label for="first-name-icon">Leave Name</label>
+                                <label htmlFor="first-name-icon">Leave Name</label>
                                 <div className="position-relative">
                                   <input type="text" className="form-control" placeholder="Input leave type" id="first-name-icon" />
                                   <div className="form-control-icon">
@@ -58,7 +58,7 @@ const AddLeaveType = (props) => {
                             </div>
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label for="email-id-icon">Description</label>
+                                <label htmlFor="email-id-icon">Description</label>
                                 <div className="position-relative">
                                   <input type="text" className="form-control" placeholder="Input Description" id="email-id-icon" />
                                   <div className="form-control-icon">
@@ -69,7 +69,7 @@ const AddLeaveType = (props) => {
                             </div>
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label for="email-id-icon">Number of days Allowed</label>
+                                <label htmlFor="email-id-icon">Number of days Allowed</label>
                                 <div className="position-relative">
                                   <input type="text" className="form-control" placeholder="Input days allowed" id="email-id-icon" />
                                   <div className="form-control-icon">

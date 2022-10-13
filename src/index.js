@@ -11,9 +11,8 @@ root.render(
     <App />
     <Helmet>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"></script>
-      <script src="assets/js/app.js"></script>
-      <script src="assets/js/pages/dashboard.js"></script>
-      <script src="assets/js/main.js"></script>
+      {/* <script src="assets/js/app.js"></script>
+      <script src="assets/js/main.js"></script> */}
     </Helmet>
   </React.StrictMode>
 );

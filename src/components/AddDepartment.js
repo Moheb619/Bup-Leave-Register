@@ -52,7 +52,7 @@ const AddDepartment = (props) => {
                                     <i className="fa fa-table"></i>
                                   </div>
                                 </div> */}
-                                <label for="company-column">Faculty</label>
+                                <label htmlFor="company-column">Faculty</label>
                                 <fieldset className="form-group">
                                   <select className="form-select" id="basicSelect">
                                     <option>FST</option>
