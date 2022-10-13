@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import FeatherIcon from "feather-icons-react";
-import { useState } from "react";
 const TopNav = (props) => {
-  const [userDropDown, setUserDropDown] = useState(false);
   return (
     <nav className="navbar navbar-header navbar-expand navbar-light">
       <div onClick={() => props.updateSidebarState()} className="sidebar-toggler" style={{ cursor: "pointer" }}>
@@ -15,7 +13,7 @@ const TopNav = (props) => {
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent"
-        aria-expanded={userDropDown ? true : false}
+        aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
@@ -52,19 +50,13 @@ const TopNav = (props) => {
             </div>
           </li>
           <li className="dropdown">
-            <a
-              style={{ cursor: "pointer" }}
-              data-bs-toggle="dropdown"
-              className={userDropDown ? "nav-link dropdown-toggle nav-link-lg nav-link-user show" : "nav-link dropdown-toggle nav-link-lg nav-link-user"}
-            >
+            <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
               <div className="avatar me-1">
                 <img src="/assets/images/admin.png" alt="" />
               </div>
-              <div className="d-none d-md-block d-lg-inline-block" onClick={() => setUserDropDown(!userDropDown)}>
-                Hi, Admin
-              </div>
+              <div className="d-none d-md-block d-lg-inline-block">Hi, Admin</div>
             </a>
-            <div className={userDropDown ? "dropdown-menu dropdown-menu-end show" : "dropdown-menu dropdown-menu-end"} data-bs-popper={userDropDown ? "none" : ""}>
+            <div className="dropdown-menu dropdown-menu-end">
               <a className="dropdown-item" href="#">
                 <FeatherIcon icon="user"></FeatherIcon> Account
               </a>
