@@ -1,9 +1,12 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 import TopNav from "./TopNav";
 
 const ManageEmployee = (props) => {
+  const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
+  const users = data.user;
   return (
     <>
       <Helmet>
@@ -40,66 +43,49 @@ const ManageEmployee = (props) => {
                 <table className="table" id="table1">
                   <thead>
                     <tr>
-                      <th>Emp ID</th>
+                      <th>ID</th>
                       <th>Full Name</th>
+                      <th>Gender</th>
+                      <th>Age</th>
+                      <th>Email</th>
+                      <th>Contact</th>
+                      <th>Profile</th>
                       <th>Department</th>
+                      <th>Designation</th>
+                      <th>User Name</th>
                       <th>Status</th>
                       <th>Reg Date</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>123456</td>
-                      <td>John Doe</td>
-                      <td>IT</td>
-                      <td>
-                        <span className="badge bg-success">Active</span>
-                      </td>
-                      <td>2021-11-01</td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>153424</td>
-                      <td>Jane Doe</td>
-                      <td>HR</td>
-                      <td>
-                        <span className="badge bg-danger">Deactivated</span>
-                      </td>
-                      <td>2021-11-01</td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>564355</td>
-                      <td>Juan Dela Cruz</td>
-                      <td>ENGINEERING</td>
-                      <td>
-                        <span className="badge bg-success">Active</span>
-                      </td>
-                      <td>2021-11-01</td>
-                      <td>
-                        <a href="editDesignation.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editDesignation.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    {users &&
+                      users.map((us) => (
+                        <tr key={us.id_number}>
+                          <td>{us.id_number}</td>
+                          <td>{us.first_name + " " + us.last_name}</td>
+                          <td>{us.gender}</td>
+                          <td>{us.age}</td>
+                          <td>{us.email}</td>
+                          <td>{us.contact}</td>
+                          <td>{us.profile}</td>
+                          <td>{us.department}</td>
+                          <td>{us.designation}</td>
+                          <td>{us.user_name}</td>
+                          <td>
+                            <span className="badge bg-success">Active</span>
+                          </td>
+                          <td>2021-11-01</td>
+                          <td>
+                            <a href="editDesignation.php">
+                              <i className="fa fa-pen text-success"></i>
+                            </a>{" "}
+                            <a href="editDesignation.php">
+                              <i className="fa fa-trash text-danger"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </table>
               </div>

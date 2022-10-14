@@ -8,7 +8,6 @@ import useFetch from "../hooks/useFetch";
 const AddEmployee = (props) => {
   const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
   const users = data.user;
-  console.log(data);
   const {
     register,
     handleSubmit,
@@ -138,7 +137,7 @@ const AddEmployee = (props) => {
                                     className="form-select"
                                     id="basicSelect"
                                     {...register("gender", {
-                                      required: true,
+                                      required: "Gender is required",
                                     })}
                                   >
                                     <option>Male</option>
@@ -282,7 +281,7 @@ const AddEmployee = (props) => {
                           </div>
                           <div className="col-md-6 col-12">
                             <div className="form-group">
-                              <label htmlFor="country-floating">Deapartment</label>
+                              <label htmlFor="country-floating">Department</label>
                               <fieldset className="form-group">
                                 <select
                                   className="form-select"
@@ -291,8 +290,7 @@ const AddEmployee = (props) => {
                                     required: "Department is Required",
                                   })}
                                 >
-                                  <option>IT</option>
-                                  <option>ENGINEERING</option>
+                                  <option>ICT</option>
                                   <option>HR</option>
                                   <option>FINANCE</option>
                                 </select>
@@ -311,10 +309,10 @@ const AddEmployee = (props) => {
                                     required: "Designation is Required",
                                   })}
                                 >
-                                  <option>IT</option>
-                                  <option>MANAGER</option>
-                                  <option>SUPERVISOR</option>
-                                  <option>ENGINEER</option>
+                                  <option>Chairman</option>
+                                  <option>Stuff</option>
+                                  <option>Faculty</option>
+                                  <option>Lecturar</option>
                                 </select>
                               </fieldset>
                             </div>
