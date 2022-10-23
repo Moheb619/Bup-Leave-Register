@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
@@ -12,60 +12,62 @@ const AddEmployee = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const handleUnique = (inputField, val) => {
     let isUnique = true;
-    users.map((us) => {
-      if (inputField === "contact") {
-        if (us.contact === val) {
-          isUnique = false;
-          return isUnique;
+    users &&
+      users.map((us) => {
+        if (inputField === "contact") {
+          if (us.contact === val) {
+            isUnique = false;
+            return isUnique;
+          }
+        } else if (inputField === "email") {
+          if (us.email === val) {
+            isUnique = false;
+            return isUnique;
+          }
+        } else if (inputField === "user_name") {
+          if (us.user_name === val) {
+            isUnique = false;
+            return isUnique;
+          }
+        } else if (inputField === "id_number") {
+          if (us.id_name === val) {
+            isUnique = false;
+            return isUnique;
+          }
         }
-      } else if (inputField === "email") {
-        if (us.email === val) {
-          isUnique = false;
-          return isUnique;
-        }
-      } else if (inputField === "user_name") {
-        if (us.user_name === val) {
-          isUnique = false;
-          return isUnique;
-        }
-      } else if (inputField === "id_number") {
-        if (us.id_name === val) {
-          isUnique = false;
-          return isUnique;
-        }
-      }
-    });
+      });
     return isUnique;
   };
 
   const onSubmit = (data) => {
-    const employeeData = {
-      id_number: data.id_number,
-      gender: data.gender,
-      first_name: data.first_name,
-      last_name: data.last_name,
-      age: data.age,
-      email: data.email,
-      contact: data.contact,
-      profile: data.contact,
-      department: data.department,
-      designation: data.designation,
-      user_name: data.user_name,
-      password: data.password,
-    };
-    // axios
-    //   .post("http://localhost:8000/api/register", employeeData)
-    //   .then((response) => {
-    //     alert(JSON.stringify(response.status));
-    //     document.getElementById("userForm").reset();
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    const employeeData = new FormData();
+    employeeData.append("id_number", data.id_number);
+    employeeData.append("gender", data.gender);
+    employeeData.append("first_name", data.first_name);
+    employeeData.append("last_name", data.last_name);
+    employeeData.append("age", data.age);
+    employeeData.append("email", data.email);
+    employeeData.append("contact", data.contact);
+    employeeData.append("profile", data.profile[0]);
+    employeeData.append("department", data.department);
+    employeeData.append("designation", data.designation);
+    employeeData.append("user_name", data.user_name);
+    employeeData.append("password", data.password);
+
+    axios
+      .post("http://localhost:8000/api/register", employeeData, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        alert(JSON.stringify(response.message));
+        reset();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <>
@@ -105,7 +107,7 @@ const AddEmployee = (props) => {
                 <div className="card">
                   <div className="card-content">
                     <div className="card-body">
-                      <form id="useForm" onSubmit={handleSubmit(onSubmit)} className="form">
+                      <form onSubmit={handleSubmit(onSubmit)} className="form">
                         <div className="row">
                           <div className="col-md-6 col-12">
                             <div className="form-group has-icon-left">

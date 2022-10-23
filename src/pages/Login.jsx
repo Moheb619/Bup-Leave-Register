@@ -1,33 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 const Login = () => {
-    // Heading animation with framer motion
-    const line = "Bup Leave Register";
-    const headingSentence = {
-      hidden: { opacity: 1 },
-      visible: {
-        opacity: 1,
-        transition: {
-          delay: 0.5,
-          staggerChildren: 0.08,
-          
-        },
+  // Heading animation with framer motion
+  const line = "Bup Leave Register";
+  const headingSentence = {
+    hidden: { opacity: 1 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 0.5,
+        staggerChildren: 0.08,
       },
-    };
-    const headingLetter = {
-      hidden: { opacity:0, y: 50 },
-      visible: {
-        opacity: 1,
-        y: 0,
-        transition:{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: "reverse",
-      }
+    },
+  };
+  const headingLetter = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 2,
+        repeat: Infinity,
+        repeatType: "reverse",
       },
-    };
-    // Heading animation with framer motion ends
+    },
+  };
+  // Heading animation with framer motion ends
   return (
     <div id="auth">
       <div className="container">
@@ -38,19 +37,21 @@ const Login = () => {
                 <div className="text-center mb-5">
                   <div className="loginCard d-flex justify-content-between mb-3">
                     <img src="assets/images/bupLogo.png" alt="bupLogo" />
-                    <motion.h2 variants={headingSentence} initial="hidden" animate="visible" className="text-dark mx-auto" >{
-                      line.split("").map((char,index)=>{
-                        return(
-                          <motion.span key={char+"-"+index} variants={headingLetter}>{char}</motion.span>
-                        )
-                      })
-                    }</motion.h2>
+                    <motion.h2 variants={headingSentence} initial="hidden" animate="visible" className="text-dark mx-auto">
+                      {line.split("").map((char, index) => {
+                        return (
+                          <motion.span key={char + "-" + index} variants={headingLetter}>
+                            {char}
+                          </motion.span>
+                        );
+                      })}
+                    </motion.h2>
                   </div>
                   <h3>Sign In</h3>
                 </div>
                 <form action="employee.html">
                   <div className="form-group position-relative has-icon-left">
-                    <label for="username">Username</label>
+                    <label htmlFor="username">Username</label>
                     <div className="position-relative">
                       <input type="text" className="form-control" id="username" />
                       <div className="form-control-icon">
@@ -60,7 +61,7 @@ const Login = () => {
                   </div>
                   <div className="form-group position-relative has-icon-left">
                     <div className="clearfix">
-                      <label for="password">Password</label>
+                      <label htmlFor="password">Password</label>
                       <a href="#" className="float-end">
                         <small>Forgot password?</small>
                       </a>

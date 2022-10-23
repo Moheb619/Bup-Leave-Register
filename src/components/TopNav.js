@@ -50,7 +50,7 @@ const TopNav = (props) => {
             </div>
           </li>
           <li className="dropdown">
-            <a href="#" data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <a style={{ cursor: "pointer" }} data-bs-toggle="dropdown" className="nav-link dropdown-toggle nav-link-lg nav-link-user">
               <div className="avatar me-1">
                 <img src="/assets/images/admin.png" alt="" />
               </div>
