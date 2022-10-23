@@ -62,7 +62,7 @@ const AddEmployee = (props) => {
     axios
       .post("http://localhost:8000/api/register", employeeData, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
-        alert(JSON.stringify(response.message));
+        alert(JSON.stringify(response.data.success));
         reset();
       })
       .catch(function (error) {
