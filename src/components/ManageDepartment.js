@@ -15,7 +15,13 @@ const ManageDepartment = (props) => {
   }, []);
 
   const deleteDepartment = (id) => {
-    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => alert("Message"));
+    const notEditable = document.getElementById(`departmentNotEditable${id}`);
+    notEditable.classList = "d-none";
+
+    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => {
+      console.log(res, " data ", res.data, " Message ", res.data.Message);
+      alert(res.data.Message);
+    });
   };
   const makeEditable = (id) => {
     const editable = document.getElementById(`departmentEditable${id}`);
@@ -35,14 +41,15 @@ const ManageDepartment = (props) => {
   };
 
   const updateDepartment = (id) => {
-    const department_name = document.getElementById(`departmentEditableNames${id}`);
-    const department_short_details = document.getElementById(`departmentEditableDetails${id}`);
-    const employeeData = new FormData();
-    employeeData.append("department_name", department_name);
-    employeeData.append("department_short_details", department_short_details);
-
+    const department_name = document.getElementById(`departmentEditableName${id}`).value;
+    const department_short_details = document.getElementById(`departmentEditableDetails${id}`).value;
+    const departmentData = new FormData();
+    departmentData.append("department_name", department_name);
+    departmentData.append("department_short_details", department_short_details);
+    document.getElementById(`departmentNotEditableName${id}`).innerText = department_name;
+    document.getElementById(`departmentNotEditableShortDetails${id}`).innerText = department_short_details;
     axios
-      .post(`http://localhost:8000/api/updateDepartment/${id}`, employeeData, { headers: { "Content-Type": "application/json" } })
+      .post(`http://localhost:8000/api/updateDepartment/${id}`, departmentData, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
         alert(JSON.stringify(response.data.Message));
       })
@@ -113,8 +120,8 @@ const ManageDepartment = (props) => {
                             </td>
                           </tr>
                           <tr key={d.id} id={`departmentNotEditable${d.id}`} className="">
-                            <td>{d.department_name}</td>
-                            <td>{d.department_short_details}</td>
+                            <td id={`departmentNotEditableName${d.id}`}>{d.department_name}</td>
+                            <td id={`departmentNotEditableShortDetails${d.id}`}>{d.department_short_details}</td>
                             <td>
                               <span style={{ cursor: "pointer" }} onClick={() => makeEditable(d.id)}>
                                 <i className="fa fa-pen text-success"></i>

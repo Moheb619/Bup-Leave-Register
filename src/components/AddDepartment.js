@@ -1,8 +1,34 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
 const AddDepartment = (props) => {
+  const [departmentName, setDepartmentName] = useState("");
+  const [departmentShortDetails, setDepartmentShortDetails] = useState("");
+
+  const handleChangeDepartmentName = (e) => {
+    setDepartmentName(e.target.value);
+    console.log(departmentName);
+  };
+  const handleChangeDepartmentShortDetails = (e) => {
+    setDepartmentShortDetails(e.target.value);
+    console.log(departmentShortDetails);
+  };
+  const addDepartment = () => {
+    const departmentData = new FormData();
+    departmentData.append("department_name", departmentName);
+    departmentData.append("department_short_details", departmentShortDetails);
+    axios
+      .post(`http://localhost:8000/api/addDepartment`, departmentData, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        alert(JSON.stringify(response.data.Message));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <>
       <Helmet>
@@ -45,26 +71,20 @@ const AddDepartment = (props) => {
                           <div className="row">
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                {/* <label htmlFor="first-name-icon">Faculty</label>
+                                <label htmlFor="first-name-icon">Department Name</label>
                                 <div className="position-relative">
-                                  <input type="text" className="form-control" placeholder="Input Faculty" id="first-name-icon" />
+                                  <input onChange={handleChangeDepartmentName} type="text" className="form-control" placeholder="Input Faculty" id="first-name-icon" />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
-                                </div> */}
-                                <label htmlFor="company-column">Faculty</label>
-                                <fieldset className="form-group">
-                                  <select className="form-select" id="basicSelect">
-                                    <option>FST</option>
-                                  </select>
-                                </fieldset>
+                                </div>
                               </div>
                             </div>
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label htmlFor="first-name-icon">Department</label>
+                                <label htmlFor="first-name-icon">Department Short Details</label>
                                 <div className="position-relative">
-                                  <input type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
+                                  <input onChange={handleChangeDepartmentShortDetails} type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
@@ -73,7 +93,7 @@ const AddDepartment = (props) => {
                             </div>
 
                             <div className="col-12 d-flex justify-content-end">
-                              <button type="submit" className="btn btn-primary me-1 mb-1">
+                              <button onClick={addDepartment} className="btn btn-primary me-1 mb-1">
                                 Submit
                               </button>
                             </div>
