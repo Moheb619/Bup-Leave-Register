@@ -1,9 +1,55 @@
+import axios from "axios";
 import React from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
 
 const ManageDepartment = (props) => {
+  const [departments, setDepartments] = useState("");
+  const [editable, setEditable] = useState(false);
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
+      setDepartments(res.data.departments);
+    });
+  }, []);
+
+  const deleteDepartment = (id) => {
+    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => alert("Message"));
+  };
+  const makeEditable = (id) => {
+    const editable = document.getElementById(`departmentEditable${id}`);
+    const noteditable = document.getElementById(`departmentNotEditable${id}`);
+
+    noteditable.classList = "d-none";
+    editable.classList = "";
+  };
+  const makeNotEditable = (id) => {
+    const editable = document.getElementById(`departmentEditable${id}`);
+    const noteditable = document.getElementById(`departmentNotEditable${id}`);
+
+    editable.classList = "d-none";
+    noteditable.classList = "";
+
+    updateDepartment(id);
+  };
+
+  const updateDepartment = (id) => {
+    const department_name = document.getElementById(`departmentEditableNames${id}`);
+    const department_short_details = document.getElementById(`departmentEditableDetails${id}`);
+    const employeeData = new FormData();
+    employeeData.append("department_name", department_name);
+    employeeData.append("department_short_details", department_short_details);
+
+    axios
+      .post(`http://localhost:8000/api/updateDepartment/${id}`, employeeData, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        alert(JSON.stringify(response.data.Message));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <>
       <Helmet>
@@ -40,39 +86,51 @@ const ManageDepartment = (props) => {
                 <table className="table" id="table1">
                   <thead>
                     <tr>
-                      <th>Faculty Name</th>
                       <th>Department Name</th>
-                      <th>Creation Date</th>
+                      <th>Department Short Details</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Faculty of Science and Technology</td>
-                      <td>ICT</td>
-                      <td>2021-11-01</td>
-                      <td>
-                        <a href="editdepartment.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editdepartment.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Faculty of Business Studies</td>
-                      <td>BBA</td>
-                      <td>2021-11-01</td>
-                      <td>
-                        <a href="editdepartment.php">
-                          <i className="fa fa-pen text-success"></i>
-                        </a>{" "}
-                        <a href="editdepartment.php">
-                          <i className="fa fa-trash text-danger"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    {departments &&
+                      departments.map((d) => (
+                        <>
+                          <tr key={d.id} id={`departmentEditable${d.id}`} className="d-none">
+                            <td>
+                              <input id={`departmentEditableName${d.id}`} type="text" defaultValue={d.department_name} />
+                            </td>
+                            <td>
+                              <input id={`departmentEditableDetails${d.id}`} type="text" defaultValue={d.department_short_details} />
+                            </td>
+                            <td>
+                              <span
+                                onClick={() => {
+                                  makeNotEditable(d.id);
+                                }}
+                              >
+                                <span style={{ cursor: "pointer", color: "green", fontWeight: "bolder" }}>OK</span>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr key={d.id} id={`departmentNotEditable${d.id}`} className="">
+                            <td>{d.department_name}</td>
+                            <td>{d.department_short_details}</td>
+                            <td>
+                              <span style={{ cursor: "pointer" }} onClick={() => makeEditable(d.id)}>
+                                <i className="fa fa-pen text-success"></i>
+                              </span>{" "}
+                              <span
+                                style={{ cursor: "pointer" }}
+                                onClick={() => {
+                                  deleteDepartment(d.id);
+                                }}
+                              >
+                                <i className="fa fa-trash text-danger"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        </>
+                      ))}
                   </tbody>
                 </table>
               </div>

@@ -147,6 +147,42 @@ function App() {
                 </>
               }
             ></Route>
+            <Route
+              path="add_department"
+              element={
+                <>
+                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
+                  <AddDepartment updateSidebarState={updateSidebarState} />
+                </>
+              }
+            ></Route>
+            <Route
+              path="manage_department"
+              element={
+                <>
+                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
+                  <ManageDepartment updateSidebarState={updateSidebarState} />
+                </>
+              }
+            ></Route>
+            <Route
+              path="add_designation"
+              element={
+                <>
+                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
+                  <AddDesignation updateSidebarState={updateSidebarState} />
+                </>
+              }
+            ></Route>
+            <Route
+              path="manage_designation"
+              element={
+                <>
+                  <Sidebar sidebarState={sidebar} updateSidebarState={updateSidebarState} />
+                  <ManageDesignation updateSidebarState={updateSidebarState} />
+                </>
+              }
+            ></Route>
           </Route>
         </Routes>
       </BrowserRouter>

@@ -49,7 +49,7 @@ const Login = () => {
                   </div>
                   <h3>Sign In</h3>
                 </div>
-                <form action="employee.html">
+                <div action="employee.html">
                   <div className="form-group position-relative has-icon-left">
                     <label htmlFor="username">Username</label>
                     <div className="position-relative">
@@ -89,7 +89,7 @@ const Login = () => {
                   <div className="clearfix">
                     <button className="btn btn-primary float-end">Login</button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

@@ -85,6 +85,34 @@ const Sidebar = (props) => {
                   </li>
                 </ul>
               </li>
+              <li className="sidebar-item  has-sub">
+                <div className="sidebar-link" onClick={() => handleSubmenu(7)}>
+                  <i className="fa fa-table text-success"></i>
+                  <span>Department</span>
+                </div>
+                <ul className={submenu === 7 ? "submenu active" : "submenu"}>
+                  <li>
+                    <Link to="/admin/add_department">Add Department</Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/manage_department">Manage Department</Link>
+                  </li>
+                </ul>
+              </li>
+              <li className="sidebar-item  has-sub">
+                <div className="sidebar-link" onClick={() => handleSubmenu(8)}>
+                  <i className="fa fa-table text-success"></i>
+                  <span>Designation</span>
+                </div>
+                <ul className={submenu === 8 ? "submenu active" : "submenu"}>
+                  <li>
+                    <Link to="/admin/add_designation">Add Designation</Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/manage_designation">Manage Designation</Link>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </div>
           <button className="sidebar-toggler btn x" onClick={() => props.updateSidebarState()}>
