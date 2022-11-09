@@ -18,10 +18,7 @@ const ManageDepartment = (props) => {
     const notEditable = document.getElementById(`departmentNotEditable${id}`);
     notEditable.classList = "d-none";
 
-    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => {
-      console.log(res, " data ", res.data, " Message ", res.data.Message);
-      alert(res.data.Message);
-    });
+    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => {});
   };
   const makeEditable = (id) => {
     const editable = document.getElementById(`departmentEditable${id}`);
@@ -50,9 +47,7 @@ const ManageDepartment = (props) => {
     document.getElementById(`departmentNotEditableShortDetails${id}`).innerText = department_short_details;
     axios
       .post(`http://localhost:8000/api/updateDepartment/${id}`, departmentData, { headers: { "Content-Type": "application/json" } })
-      .then((response) => {
-        alert(JSON.stringify(response.data.Message));
-      })
+      .then((response) => {})
       .catch(function (error) {
         console.log(error);
       });

@@ -5,7 +5,14 @@ import TopNav from "./TopNav";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import useFetch from "../hooks/useFetch";
+import { useEffect } from "react";
 const AddEmployee = (props) => {
+  const [departments, setDepartments] = useState("");
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
+      setDepartments(res.data.departments);
+    });
+  }, []);
   const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
   const users = data.user;
   const {
@@ -292,9 +299,7 @@ const AddEmployee = (props) => {
                                     required: "Department is Required",
                                   })}
                                 >
-                                  <option>ICT</option>
-                                  <option>HR</option>
-                                  <option>FINANCE</option>
+                                  {departments && departments.map((d) => <option>{d.department_name}</option>)}
                                 </select>
                               </fieldset>
                             </div>

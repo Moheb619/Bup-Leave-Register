@@ -7,23 +7,35 @@ import TopNav from "./TopNav";
 const AddDepartment = (props) => {
   const [departmentName, setDepartmentName] = useState("");
   const [departmentShortDetails, setDepartmentShortDetails] = useState("");
-
-  const handleChangeDepartmentName = (e) => {
-    setDepartmentName(e.target.value);
-    console.log(departmentName);
-  };
-  const handleChangeDepartmentShortDetails = (e) => {
-    setDepartmentShortDetails(e.target.value);
-    console.log(departmentShortDetails);
-  };
-  const addDepartment = () => {
+  const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState("");
+  const addDepartment = (e) => {
+    e.preventDefault();
     const departmentData = new FormData();
     departmentData.append("department_name", departmentName);
     departmentData.append("department_short_details", departmentShortDetails);
     axios
       .post(`http://localhost:8000/api/addDepartment`, departmentData, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
-        alert(JSON.stringify(response.data.Message));
+        if (response.data.Message.department_name) {
+          setMessage(response.data.Message.department_name);
+          setMessageColor(response.data.MessageColor);
+          setTimeout(function () {
+            setMessage("");
+            setMessageColor("");
+          }, 2000);
+        } else {
+          setMessage(response.data.Message);
+          const elements = document.getElementsByClassName("form-control");
+          for (let i = 0; i < elements.length; i++) {
+            elements[i].value = "";
+          }
+          setMessageColor(response.data.MessageColor);
+          setTimeout(function () {
+            setMessage("");
+            setMessageColor("");
+          }, 2000);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -73,7 +85,7 @@ const AddDepartment = (props) => {
                               <div className="form-group has-icon-left">
                                 <label htmlFor="first-name-icon">Department Name</label>
                                 <div className="position-relative">
-                                  <input onChange={handleChangeDepartmentName} type="text" className="form-control" placeholder="Input Faculty" id="first-name-icon" />
+                                  <input onChange={(e) => setDepartmentName(e.target.value)} type="text" className="form-control" placeholder="Input Faculty" id="first-name-icon" />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
@@ -84,7 +96,7 @@ const AddDepartment = (props) => {
                               <div className="form-group has-icon-left">
                                 <label htmlFor="first-name-icon">Department Short Details</label>
                                 <div className="position-relative">
-                                  <input onChange={handleChangeDepartmentShortDetails} type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
+                                  <input onChange={(e) => setDepartmentShortDetails(e.target.value)} type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
@@ -92,7 +104,12 @@ const AddDepartment = (props) => {
                               </div>
                             </div>
 
-                            <div className="col-12 d-flex justify-content-end">
+                            <div className="col-6 d-flex justify-content-start">
+                              <p id="addDepartmentSuccessMessage" className={messageColor}>
+                                {message}
+                              </p>
+                            </div>
+                            <div className="col-6 d-flex justify-content-end">
                               <button onClick={addDepartment} className="btn btn-primary me-1 mb-1">
                                 Submit
                               </button>
