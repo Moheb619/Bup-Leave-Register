@@ -1,41 +1,53 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
 const AddDepartment = (props) => {
-  const [departmentName, setDepartmentName] = useState("");
-  const [departmentShortDetails, setDepartmentShortDetails] = useState("");
+  const [departments, setDepartments] = useState("");
   const [message, setMessage] = useState("");
   const [messageColor, setMessageColor] = useState("");
-  const addDepartment = (e) => {
-    e.preventDefault();
-    const departmentData = new FormData();
-    departmentData.append("department_name", departmentName);
-    departmentData.append("department_short_details", departmentShortDetails);
-    axios
-      .post(`http://localhost:8000/api/addDepartment`, departmentData, { headers: { "Content-Type": "application/json" } })
-      .then((response) => {
-        if (response.data.Message.department_name) {
-          setMessage(response.data.Message.department_name);
-          setMessageColor(response.data.MessageColor);
-          setTimeout(function () {
-            setMessage("");
-            setMessageColor("");
-          }, 2000);
-        } else {
-          setMessage(response.data.Message);
-          const elements = document.getElementsByClassName("form-control");
-          for (let i = 0; i < elements.length; i++) {
-            elements[i].value = "";
+  useEffect(() => {
+    axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
+      setDepartments(res.data.departments);
+    });
+  }, []);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+  const handleUnique = (inputField, val) => {
+    let isUnique = true;
+    departments &&
+      departments.map((des) => {
+        if (inputField === "department_name") {
+          if (des.department_name === val) {
+            isUnique = false;
+            return isUnique;
           }
-          setMessageColor(response.data.MessageColor);
-          setTimeout(function () {
-            setMessage("");
-            setMessageColor("");
-          }, 2000);
         }
+      });
+    return isUnique;
+  };
+  const onSubmit = (data) => {
+    const departmentData = new FormData();
+    departmentData.append("department_name", data.department_name);
+    departmentData.append("department_short_details", data.department_short_details);
+
+    axios
+      .post("http://localhost:8000/api/addDepartment", departmentData, { headers: { "Content-Type": "application/json" } })
+      .then((response) => {
+        reset();
+        setMessage(response.data.Message);
+        setMessageColor(response.data.MessageColor);
+        setTimeout(function () {
+          setMessage("");
+          setMessageColor("");
+        }, 2000);
       })
       .catch(function (error) {
         console.log(error);
@@ -48,6 +60,7 @@ const AddDepartment = (props) => {
       </Helmet>
       <div id="main">
         <TopNav updateSidebarState={props.updateSidebarState}></TopNav>
+
         <div className="main-content container-fluid">
           <div className="page-title">
             <div className="row">
@@ -78,39 +91,56 @@ const AddDepartment = (props) => {
                 <div className="card">
                   <div className="card-content">
                     <div className="card-body">
-                      <form className="form form-vertical">
+                      <form onSubmit={handleSubmit(onSubmit)} className="form form-vertical">
                         <div className="form-body">
                           <div className="row">
                             <div className="col-12">
                               <div className="form-group has-icon-left">
                                 <label htmlFor="first-name-icon">Department Name</label>
                                 <div className="position-relative">
-                                  <input onChange={(e) => setDepartmentName(e.target.value)} type="text" className="form-control" placeholder="Input Faculty" id="first-name-icon" />
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Input Department"
+                                    id="first-name-icon"
+                                    {...register("department_name", {
+                                      required: "Department Name is Required",
+                                      validate: (value) => handleUnique("department_name", value) || "Department is already taken",
+                                    })}
+                                  />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
                                 </div>
                               </div>
+                              {errors.department_name && <p className="text-danger">{errors.department_name.message}</p>}
                             </div>
                             <div className="col-12">
                               <div className="form-group has-icon-left">
-                                <label htmlFor="first-name-icon">Department Short Details</label>
+                                <label htmlFor="email-id-icon">Description</label>
                                 <div className="position-relative">
-                                  <input onChange={(e) => setDepartmentShortDetails(e.target.value)} type="text" className="form-control" placeholder="Input Department" id="first-name-icon" />
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Input Description"
+                                    id="email-id-icon"
+                                    {...register("department_short_details", {
+                                      required: "Department Details is required",
+                                    })}
+                                  />
                                   <div className="form-control-icon">
                                     <i className="fa fa-table"></i>
                                   </div>
                                 </div>
                               </div>
+                              {errors.department_short_details && <p className="text-danger">{errors.department_short_details.message}</p>}
                             </div>
 
                             <div className="col-6 d-flex justify-content-start">
-                              <p id="addDepartmentSuccessMessage" className={messageColor}>
-                                {message}
-                              </p>
+                              <p className={messageColor}>{message}</p>
                             </div>
                             <div className="col-6 d-flex justify-content-end">
-                              <button onClick={addDepartment} className="btn btn-primary me-1 mb-1">
+                              <button type="submit" className="btn btn-primary me-1 mb-1">
                                 Submit
                               </button>
                             </div>

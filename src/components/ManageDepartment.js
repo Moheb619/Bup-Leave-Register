@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import TopNav from "./TopNav";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ManageDepartment = (props) => {
   const [departments, setDepartments] = useState("");
@@ -110,7 +112,9 @@ const ManageDepartment = (props) => {
                                   makeNotEditable(d.id);
                                 }}
                               >
-                                <span style={{ cursor: "pointer", color: "green", fontWeight: "bolder" }}>OK</span>
+                                <span style={{ cursor: "pointer" }}>
+                                  <FontAwesomeIcon icon={faCheck} size="lg" className="text-success" />
+                                </span>
                               </span>
                             </td>
                           </tr>
@@ -119,7 +123,7 @@ const ManageDepartment = (props) => {
                             <td id={`departmentNotEditableShortDetails${d.id}`}>{d.department_short_details}</td>
                             <td>
                               <span style={{ cursor: "pointer" }} onClick={() => makeEditable(d.id)}>
-                                <i className="fa fa-pen text-success"></i>
+                                <FontAwesomeIcon icon={faPen} className="text-success" />
                               </span>{" "}
                               <span
                                 style={{ cursor: "pointer" }}
@@ -127,7 +131,7 @@ const ManageDepartment = (props) => {
                                   deleteDepartment(d.id);
                                 }}
                               >
-                                <i className="fa fa-trash text-danger"></i>
+                                <FontAwesomeIcon icon={faTrash} className="text-danger"></FontAwesomeIcon>
                               </span>
                             </td>
                           </tr>

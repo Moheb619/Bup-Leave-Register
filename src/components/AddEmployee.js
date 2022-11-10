@@ -8,9 +8,13 @@ import useFetch from "../hooks/useFetch";
 import { useEffect } from "react";
 const AddEmployee = (props) => {
   const [departments, setDepartments] = useState("");
+  const [designations, setDesignations] = useState("");
   useEffect(() => {
     axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
       setDepartments(res.data.departments);
+    });
+    axios.get(`http://localhost:8000/api/getDesignations`).then((res) => {
+      setDesignations(res.data.designations);
     });
   }, []);
   const { data, loading, error } = useFetch(`http://localhost:8000/api/all_user`);
@@ -316,10 +320,7 @@ const AddEmployee = (props) => {
                                     required: "Designation is Required",
                                   })}
                                 >
-                                  <option>Chairman</option>
-                                  <option>Stuff</option>
-                                  <option>Faculty</option>
-                                  <option>Lecturar</option>
+                                  {designations && designations.map((d) => <option>{d.designation_name}</option>)}
                                 </select>
                               </fieldset>
                             </div>
