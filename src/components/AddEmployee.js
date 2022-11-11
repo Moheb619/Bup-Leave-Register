@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const AddEmployee = (props) => {
   const [departments, setDepartments] = useState("");
   const [designations, setDesignations] = useState("");
+  const [message, setMessage] = useState("");
   useEffect(() => {
     axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
       setDepartments(res.data.departments);
@@ -57,7 +58,7 @@ const AddEmployee = (props) => {
 
   const onSubmit = (data) => {
     const employeeData = new FormData();
-    employeeData.append("id_number", data.id_number);
+    employeeData.append("id", data.id_number);
     employeeData.append("gender", data.gender);
     employeeData.append("first_name", data.first_name);
     employeeData.append("last_name", data.last_name);
@@ -65,15 +66,18 @@ const AddEmployee = (props) => {
     employeeData.append("email", data.email);
     employeeData.append("contact", data.contact);
     employeeData.append("profile", data.profile[0]);
-    employeeData.append("department", data.department);
-    employeeData.append("designation", data.designation);
+    employeeData.append("department_id", data.department);
+    employeeData.append("designation_id", data.designation);
     employeeData.append("user_name", data.user_name);
     employeeData.append("password", data.password);
 
     axios
       .post("http://localhost:8000/api/register", employeeData, { headers: { "Content-Type": "application/json" } })
       .then((response) => {
-        alert(JSON.stringify(response.data.success));
+        setMessage("User Added Successfully");
+        setTimeout(function () {
+          setMessage("");
+        }, 2000);
         reset();
       })
       .catch(function (error) {
@@ -371,7 +375,10 @@ const AddEmployee = (props) => {
                             </div>
                             {errors.password && <p className="text-danger">{errors.password.message}</p>}
                           </div>
-                          <div className="col-12 d-flex justify-content-end">
+                          <div className="col-6 d-flex justify-content-start">
+                            <p className="text-success">{message}</p>
+                          </div>
+                          <div className="col-6 d-flex justify-content-end">
                             <button type="submit" className="btn btn-primary me-1 mb-1">
                               Submit
                             </button>
