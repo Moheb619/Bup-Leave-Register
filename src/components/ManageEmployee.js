@@ -175,37 +175,15 @@ const ManageEmployee = (props) => {
                             </td>
                             <td>
                               <fieldset className="form-group">
-                                <select
-                                  className="form-select"
-                                  id={`basicSelect userEditableDepartment${d.id}`}
-                                  defaultValue={
-                                    departments &&
-                                    departments.map((dept) => {
-                                      if (dept.id === d.department_id) {
-                                        return dept.department_name;
-                                      }
-                                    })
-                                  }
-                                >
-                                  {departments && departments.map((d) => <option>{d.department_name}</option>)}
+                                <select className="form-select" id={`basicSelect userEditableDepartment${d.id}`}>
+                                  {departments && departments.map((dept) => <option selected={dept.id === d.designation_id ? "selected" : ""}>{dept.department_name}</option>)}
                                 </select>
                               </fieldset>
                             </td>
                             <td>
                               <fieldset className="form-group">
-                                <select
-                                  className="form-select"
-                                  id={`basicSelect userEditableDesignation${d.id}`}
-                                  defaultValue={
-                                    designations &&
-                                    designations.map((desg) => {
-                                      if (desg.id === d.designation_id) {
-                                        return desg.designation_name;
-                                      }
-                                    })
-                                  }
-                                >
-                                  {designations && designations.map((d) => <option>{d.designation_name}</option>)}
+                                <select className="form-select" id={`basicSelect userEditableDesignation${d.id}`}>
+                                  {designations && designations.map((desg) => <option selected={desg.id === d.designation_id ? "selected" : ""}>{desg.designation_name}</option>)}
                                 </select>
                               </fieldset>
                             </td>
