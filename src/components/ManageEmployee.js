@@ -5,23 +5,30 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
 import TopNav from "./TopNav";
 
 const ManageEmployee = (props) => {
-  const [users, setDepartments] = useState("");
+  const [departments, setDepartments] = useState("");
+  const [designations, setDesignations] = useState("");
+  const [users, setUsers] = useState("");
   const [editable, setEditable] = useState(false);
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/all_user`).then((res) => {
-      setDepartments(res.data.users);
+    axios.get(`http://localhost:8000/api/getUsers`).then((res) => {
+      setUsers(res.data.users);
+    });
+    axios.get(`http://localhost:8000/api/getDepartments`).then((res) => {
+      setDepartments(res.data.departments);
+    });
+    axios.get(`http://localhost:8000/api/getDesignations`).then((res) => {
+      setDesignations(res.data.designations);
     });
   }, []);
 
-  const deleteDepartment = (id) => {
+  const deleteUser = (id) => {
     const notEditable = document.getElementById(`userNotEditable${id}`);
     notEditable.classList = "d-none";
 
-    axios.delete(`http://localhost:8000/api/deleteDepartment/${id}`).then((res) => {});
+    axios.delete(`http://localhost:8000/api/deleteUser/${id}`).then((res) => {});
   };
   const makeEditable = (id) => {
     const editable = document.getElementById(`userEditable${id}`);
@@ -37,19 +44,46 @@ const ManageEmployee = (props) => {
     editable.classList = "d-none";
     noteditable.classList = "";
 
-    updateDepartment(id);
+    updateUser(id);
   };
 
-  const updateDepartment = (id) => {
-    const user_name = document.getElementById(`userEditableName${id}`).value;
-    const user_short_details = document.getElementById(`userEditableDetails${id}`).value;
+  const updateUser = (id) => {
+    const id_number = document.getElementById(`userEditableId${id}`).value;
+    const gender = document.getElementById(`userEditableGender${id}`).value;
+    const first_name = document.getElementById(`userEditableFirstName${id}`).value;
+    const last_name = document.getElementById(`userEditableLastName${id}`).value;
+    const age = document.getElementById(`userEditableAge${id}`).value;
+    const email = document.getElementById(`userEditableEmail${id}`).value;
+    const contact = document.getElementById(`userEditableContact${id}`).value;
+    const profile = document.getElementById(`userEditableProfile${id}`).value;
+    const department = document.getElementById(`userEditableDepartment${id}`).value;
+    const designation = document.getElementById(`userEditableDesignation${id}`).value;
+    const user_name = document.getElementById(`userEditableUserName${id}`).value;
     const userData = new FormData();
+    userData.append("id", id_number);
+    userData.append("gender", gender);
+    userData.append("first_name", first_name);
+    userData.append("last_name", last_name);
+    userData.append("age", age);
+    userData.append("email", email);
+    userData.append("contact", contact);
+    userData.append("profile", profile);
+    userData.append("department_id", department);
+    userData.append("designation_id", designation);
     userData.append("user_name", user_name);
-    userData.append("user_short_details", user_short_details);
-    document.getElementById(`userNotEditableName${id}`).innerText = user_name;
-    document.getElementById(`userNotEditableShortDetails${id}`).innerText = user_short_details;
+    document.getElementById(`userNotEditableId${id}`).innerText = id_number;
+    document.getElementById(`userNotEditableGender${id}`).innerText = gender;
+    document.getElementById(`userNotEditableFirstName${id}`).innerText = first_name;
+    document.getElementById(`userNotEditableLastName${id}`).innerText = last_name;
+    document.getElementById(`userNotEditableAge${id}`).innerText = age;
+    document.getElementById(`userNotEditableEmail${id}`).innerText = email;
+    document.getElementById(`userNotEditableContact${id}`).innerText = contact;
+    document.getElementById(`userNotEditableProfile${id}`).innerText = profile;
+    document.getElementById(`userNotEditableDepartment${id}`).innerText = department;
+    document.getElementById(`userNotEditableDesignation${id}`).innerText = designation;
+    document.getElementById(`userNotEditableUserName${id}`).innerText = user_name;
     axios
-      .post(`http://localhost:8000/api/updateDepartment/${id}`, userData, { headers: { "Content-Type": "application/json" } })
+      .post(`http://localhost:8000/api/updateUser/${id}`, userData, { headers: { "Content-Type": "application/json" } })
       .then((response) => {})
       .catch(function (error) {
         console.log(error);
@@ -58,7 +92,7 @@ const ManageEmployee = (props) => {
   return (
     <>
       <Helmet>
-        <title>Manage Department | BUP Leave Register</title>
+        <title>Manage User | BUP Leave Register</title>
       </Helmet>
       <div id="main">
         <TopNav updateSidebarState={props.updateSidebarState}></TopNav>
@@ -67,7 +101,7 @@ const ManageEmployee = (props) => {
           <div className="page-title">
             <div className="row">
               <div className="col-12 col-md-6 order-md-1 order-last">
-                <h3>Manage Department</h3>
+                <h3>Manage User</h3>
               </div>
               <div className="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" className="breadcrumb-header">
@@ -78,7 +112,7 @@ const ManageEmployee = (props) => {
                       </Link>
                     </li>
                     <li className="breadcrumb-item active" aria-current="page">
-                      Manage Department
+                      Manage User
                     </li>
                   </ol>
                 </nav>
@@ -91,8 +125,17 @@ const ManageEmployee = (props) => {
                 <table className="table" id="table1">
                   <thead>
                     <tr>
-                      <th>Department Name</th>
-                      <th>Department Short Details</th>
+                      <th>Id</th>
+                      <th>Gender</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Age</th>
+                      <th>Email</th>
+                      <th>Contact</th>
+                      <th>Profile Image</th>
+                      <th>Department</th>
+                      <th>Designation</th>
+                      <th>User Name</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -100,12 +143,74 @@ const ManageEmployee = (props) => {
                     {users &&
                       users.map((d) => (
                         <>
-                          <tr key={d.id} id={`userEditable${d.id}`} className="d-none">
+                          <tr key={d.id + "editable"} id={`userEditable${d.id}`} className="d-none">
                             <td>
-                              <input id={`userEditableName${d.id}`} type="text" defaultValue={d.user_name} />
+                              <input id={`userEditableId${d.id}`} type="text" defaultValue={d.id} />
                             </td>
                             <td>
-                              <input id={`userEditableDetails${d.id}`} type="text" defaultValue={d.user_short_details} />
+                              <fieldset className="form-group">
+                                <select className="form-select" id={`basicSelect userEditableGender${d.id}`} defaultValue={d.gender}>
+                                  <option>Female</option>
+                                  <option>Male</option>
+                                </select>
+                              </fieldset>
+                            </td>
+                            <td>
+                              <input id={`userEditableFirstName${d.id}`} type="text" defaultValue={d.first_name} />
+                            </td>
+                            <td>
+                              <input id={`userEditableLastName${d.id}`} type="text" defaultValue={d.last_name} />
+                            </td>
+                            <td>
+                              <input id={`userEditableAge${d.id}`} type="text" defaultValue={d.age} />
+                            </td>
+                            <td>
+                              <input id={`userEditableEmail${d.id}`} type="text" defaultValue={d.email} />
+                            </td>
+                            <td>
+                              <input id={`userEditableContact${d.id}`} type="text" defaultValue={d.contact} />
+                            </td>
+                            <td>
+                              <input id={`userEditableProfile${d.id}`} type="text" defaultValue={d.profile} />
+                            </td>
+                            <td>
+                              <fieldset className="form-group">
+                                <select
+                                  className="form-select"
+                                  id={`basicSelect userEditableDepartment${d.id}`}
+                                  defaultValue={
+                                    departments &&
+                                    departments.map((dept) => {
+                                      if (dept.id === d.department_id) {
+                                        return dept.department_name;
+                                      }
+                                    })
+                                  }
+                                >
+                                  {departments && departments.map((d) => <option>{d.department_name}</option>)}
+                                </select>
+                              </fieldset>
+                            </td>
+                            <td>
+                              <fieldset className="form-group">
+                                <select
+                                  className="form-select"
+                                  id={`basicSelect userEditableDesignation${d.id}`}
+                                  defaultValue={
+                                    designations &&
+                                    designations.map((desg) => {
+                                      if (desg.id === d.designation_id) {
+                                        return desg.designation_name;
+                                      }
+                                    })
+                                  }
+                                >
+                                  {designations && designations.map((d) => <option>{d.designation_name}</option>)}
+                                </select>
+                              </fieldset>
+                            </td>
+                            <td>
+                              <input id={`userEditableUserName${d.id}`} type="text" defaultValue={d.user_name} />
                             </td>
                             <td>
                               <span
@@ -119,9 +224,32 @@ const ManageEmployee = (props) => {
                               </span>
                             </td>
                           </tr>
-                          <tr key={d.id} id={`userNotEditable${d.id}`} className="">
-                            <td id={`userNotEditableName${d.id}`}>{d.user_name}</td>
-                            <td id={`userNotEditableShortDetails${d.id}`}>{d.user_short_details}</td>
+                          <tr key={d.id + "notEditable"} id={`userNotEditable${d.id}`} className="">
+                            <td id={`userNotEditableId${d.id}`}>{d.id}</td>
+                            <td id={`userNotEditableGender${d.id}`}>{d.gender}</td>
+                            <td id={`userNotEditableFirstName${d.id}`}>{d.first_name}</td>
+                            <td id={`userNotEditableLastName${d.id}`}>{d.last_name}</td>
+                            <td id={`userNotEditableAge${d.id}`}>{d.age}</td>
+                            <td id={`userNotEditableEmail${d.id}`}>{d.email}</td>
+                            <td id={`userNotEditableContact${d.id}`}>{d.contact}</td>
+                            <td id={`userNotEditableProfile${d.id}`}>{d.profile}</td>
+                            <td id={`userNotEditableDepartment${d.id}`}>
+                              {departments &&
+                                departments.map((dept) => {
+                                  if (dept.id === d.department_id) {
+                                    return dept.department_name;
+                                  }
+                                })}
+                            </td>
+                            <td id={`userNotEditableDesignation${d.id}`}>
+                              {designations &&
+                                designations.map((desg) => {
+                                  if (desg.id === d.designation_id) {
+                                    return desg.designation_name;
+                                  }
+                                })}
+                            </td>
+                            <td id={`userNotEditableUserName${d.id}`}>{d.user_name}</td>
                             <td>
                               <span style={{ cursor: "pointer" }} onClick={() => makeEditable(d.id)}>
                                 <FontAwesomeIcon icon={faPen} className="text-success" />
@@ -129,7 +257,7 @@ const ManageEmployee = (props) => {
                               <span
                                 style={{ cursor: "pointer" }}
                                 onClick={() => {
-                                  deleteDepartment(d.id);
+                                  deleteUser(d.id);
                                 }}
                               >
                                 <FontAwesomeIcon icon={faTrash} className="text-danger"></FontAwesomeIcon>

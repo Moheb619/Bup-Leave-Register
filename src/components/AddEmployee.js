@@ -307,6 +307,7 @@ const AddEmployee = (props) => {
                                     required: "Department is Required",
                                   })}
                                 >
+                                  <option></option>
                                   {departments && departments.map((d) => <option>{d.department_name}</option>)}
                                 </select>
                               </fieldset>
@@ -324,6 +325,7 @@ const AddEmployee = (props) => {
                                     required: "Designation is Required",
                                   })}
                                 >
+                                  <option></option>
                                   {designations && designations.map((d) => <option>{d.designation_name}</option>)}
                                 </select>
                               </fieldset>
